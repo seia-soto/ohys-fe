@@ -1,0 +1,14 @@
+.sfe__ohys_header {
+  padding-top: 300px;
+
+  background-image: linear-gradient( rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55) ), url(/assets/1097489.jpg);
+
+  background-position: center;
+  background-size: cover;
+
+  box-shadow: 0px 15px 35px 10px #ccc;
+}
+
+.sfe__ohys_body {
+  padding-top: 45px;
+}
