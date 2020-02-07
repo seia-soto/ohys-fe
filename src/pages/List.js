@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom'
 
 import fetch from 'node-fetch'
 
+import config from '../config'
+
 const Home = props => {
   const params = useParams()
   const [isLoading, setLoading] = useState(true)
@@ -17,13 +19,13 @@ const Home = props => {
   }
 
   useEffect(() => {
+    setLoading(true)
+
     if (isNaN(page) || page <= 0) {
       setPage(1)
     }
 
-    window.scrollTo(0, 250)
-
-    fetch('https://api-v0.ohys.seia.io/get?page=' + page)
+    fetch(config.backend + '/get?page=' + page)
       .then(res => res.json())
       .then(items => {
         updateData(items)

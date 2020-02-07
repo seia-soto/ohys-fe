@@ -4,20 +4,22 @@ import { useParams } from 'react-router-dom'
 import FormData from 'form-data'
 import fetch from 'node-fetch'
 
+import config from '../config'
+
 const Search = props => {
   const params = useParams()
   const [isLoading, setLoading] = useState(true)
   const [data, updateData] = useState([])
 
   useEffect(() => {
-    window.scrollTo(0, 250)
+    setLoading(true)
 
     const form = new FormData()
 
     form.append('scope', 'series')
     form.append('keyword', params.keyword)
 
-    fetch('https://api-v0.ohys.seia.io/search', {
+    fetch(config.backend + '/search', {
       method: 'POST',
       body: form
     })
