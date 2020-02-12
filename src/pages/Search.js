@@ -6,6 +6,8 @@ import fetch from 'node-fetch'
 
 import config from '../config'
 
+import Item from '../components/Item'
+
 const Search = props => {
   const params = useParams()
   const [isLoading, setLoading] = useState(true)
@@ -50,17 +52,16 @@ const Search = props => {
 
       <div className='ui relaxed divided list'>
         {
-          data.map(item => (
-            <div className='item' key={item.id}>
-              <i className='file icon'/>
-              <div className='content'>
-                <a className='header' href={item.link}>{item.series}</a>
-                <div className='description'>
-                  {item.episode ? 'Episode ' + item.episode : 'Single episode'}, {item.resolution} {item.broadcaster} {item.videoFormat} {item.audioFormat}
-                </div>
-              </div>
-            </div>
-          ))
+          data.map((item, key) => <Item
+            key={key}
+            link={item.link}
+            series={item.series}
+            episode={item.episode}
+            resolution={item.resolution}
+            broadcaster={item.broadcaster}
+            videoFormat={item.videoFormat}
+            audioFormat={item.audioFormat}
+          />)
         }
       </div>
     </>

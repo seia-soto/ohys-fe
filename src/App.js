@@ -6,6 +6,7 @@ import SearchBar from './components/SearchBar'
 
 import List from './pages/List'
 import Search from './pages/Search'
+import Series from './pages/Series'
 
 const App = props => {
   return (
@@ -45,6 +46,9 @@ const App = props => {
             </Route>
             <Route path='/search/:keyword'>
               <Search />
+            </Route>
+            <Route path='/series/:series'>
+              <Series />
             </Route>
             <Route path='/'>
               <Redirect to='/page/1' />
