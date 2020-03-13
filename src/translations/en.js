@@ -3,11 +3,11 @@ export default {
     links: {
       support: {
         title: 'Get support on Discord',
-        description: 'Are you getting some problems? Contact developer directly via Discord.'
+        description: 'Are you getting some problems? Contact the developer directly via Discord.'
       },
       mirror: {
         title: 'Official mirror',
-        description: 'The file you are looking for is not found? Try searching on the ofiicial mirror.'
+        description: 'Is the file you are looking for not found? Try searching on the official mirror.'
       }
     },
     searchBar: {
@@ -17,14 +17,14 @@ export default {
   },
   api: {
     loading: 'Awaiting API response...',
-    ifLoadTooLong: 'If the application load too long, try refreshing the webpage.'
+    ifLoadTooLong: 'If the application takes too long, try refreshing the webpage.'
   },
   search: {
     title: 'Search',
     description: 'Showing search result of \'%s\'.'
   },
   item: {
-    parsingFailed: 'There is a problem during parsing the name of this file.',
+    parsingFailed: 'There was a problem parsing the name of this file.',
     viewSeries: 'View all series'
   },
   list: {
