@@ -8,7 +8,13 @@ import List from './pages/List'
 import Search from './pages/Search'
 import Series from './pages/Series'
 
+import store from './structures/store'
+import translations from './translations'
+
 const App = props => {
+  const { language } = store.get()
+  const translation = translations[language]
+
   return (
     <BrowserRouter>
       <Header />
@@ -21,15 +27,15 @@ const App = props => {
                 <a className='item' href='https://discordapp.com/invite/vAEBXWY'>
                   <i className='magic icon'/>
                   <div className='content'>
-                    <div className='header'>Get support</div>
-                    <div className='description'>Getting some problems? Contact developer directly via Discord.</div>
+                    <div className='header'>{translation.app.links.support.title}</div>
+                    <div className='description'>{translation.app.links.support.description}</div>
                   </div>
                 </a>
                 <a className='item' href='https://cryental.dev/services/anime/'>
                   <i className='file icon'/>
                   <div className='content'>
-                    <div className='header'>Official mirror</div>
-                    <div className='description'>Torrent you're looking for not found? Try searching on mirror.</div>
+                    <div className='header'>{translation.app.links.mirror.title}</div>
+                    <div className='description'>{translation.app.links.mirror.description}</div>
                   </div>
                 </a>
               </div>

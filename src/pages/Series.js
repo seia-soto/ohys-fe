@@ -5,14 +5,19 @@ import FormData from 'form-data'
 import fetch from 'node-fetch'
 
 import config from '../config'
+import store from '../structures/store'
+import translations from '../translations'
 
 import Item from '../components/Item'
+import LoadingContainer from '../components/LoadingContainer'
 
 const Series = props => {
   const params = useParams()
   const [isLoading, setLoading] = useState(true)
   const [data, updateData] = useState([])
   const [meta, updateMeta] = useState({})
+  const { language } = store.get()
+  const translation = translations[language]
 
   useEffect(() => {
     setLoading(true)
@@ -48,12 +53,7 @@ const Series = props => {
   }, [params.series])
 
   if (isLoading) {
-    return (
-      <div className='ui center aligned container'>
-        <h3 className='ui header'>Awaiting API...</h3>
-        <p>If the application doesn't load too long, try refreshing the webpage.</p>
-      </div>
-    )
+    return <LoadingContainer />
   }
 
   return (
@@ -70,13 +70,13 @@ const Series = props => {
           <img className='ui basic fluid rounded image' src={meta.coverImageURL} />
 
           <h3 className='ui header'>
-            Status
+            {translation.series.status}
             <div className='sub header'>
-              {meta.status}
+              {translation.series.statusTypes[meta.status]}
             </div>
           </h3>
           <h3 className='ui header'>
-            Description
+            {translation.series.description}
             <div className='sub header'>
               {meta.description}
             </div>

@@ -3,15 +3,21 @@ import { useParams } from 'react-router-dom'
 
 import FormData from 'form-data'
 import fetch from 'node-fetch'
+import util from 'util'
 
 import config from '../config'
+import store from '../structures/store'
+import translations from '../translations'
 
 import Item from '../components/Item'
+import LoadingContainer from '../components/LoadingContainer'
 
 const Search = props => {
   const params = useParams()
   const [isLoading, setLoading] = useState(true)
   const [data, updateData] = useState([])
+  const { language } = store.get()
+  const translation = translations[language]
 
   useEffect(() => {
     setLoading(true)
@@ -33,35 +39,32 @@ const Search = props => {
   }, [params.keyword])
 
   if (isLoading) {
-    return (
-      <div className='ui center aligned container'>
-        <h3 className='ui header'>Awaiting API...</h3>
-        <p>If the application doesn't load too long, try refreshing the webpage.</p>
-      </div>
-    )
+    return <LoadingContainer />
   }
 
   return (
     <>
       <h1 className='ui header'>
-        Search
+        {translation.search.title}
         <div className='sub header'>
-          Search result of '{params.keyword}'.
+          {util.format(translation.search.description, params.keyword)}
         </div>
       </h1>
 
       <div className='ui relaxed divided list'>
         {
-          data.map((item, key) => <Item
-            key={key}
-            link={item.link}
-            series={item.series}
-            episode={item.episode}
-            resolution={item.resolution}
-            broadcaster={item.broadcaster}
-            videoFormat={item.videoFormat}
-            audioFormat={item.audioFormat}
-          />)
+          data.map((item, key) => (
+            <Item
+              key={key}
+              link={item.link}
+              series={item.series}
+              episode={item.episode}
+              resolution={item.resolution}
+              broadcaster={item.broadcaster}
+              videoFormat={item.videoFormat}
+              audioFormat={item.audioFormat}
+            />
+          ))
         }
       </div>
     </>

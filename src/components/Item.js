@@ -2,16 +2,37 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import store from '../structures/store'
+import translations from '../translations'
+
 const Item = props => {
+  const { language } = store.get()
+  const translation = translations[language]
+
+  let title = props.original
+  let description = translation.item.parsingFailed
+
+  if (props.series.length) {
+    title = props.series + (props.episode >= 0 ? ` - ${props.episode}` : '')
+    description = (
+      <>
+        {props.resolution} {props.broadcaster} {props.videoFormat} {props.audioFormat}
+        <br />
+        <br />
+        <Link to={'/series/' + props.series} ><a>{translation.item.viewSeries}</a></Link>
+      </>
+    )
+  }
+
   return (
     <div className='item'>
       <i className='file icon'/>
       <div className='content'>
-        <a className='header' href={props.link}>{props.series} - {props.episode >= 0 ? 'Episode ' + props.episode : 'Single episode or package'}</a>
+        <a className='header' href={props.link}>
+          {title}
+        </a>
         <div className='description'>
-          {props.resolution} {props.broadcaster} {props.videoFormat} {props.audioFormat}
-          <br />
-          <Link to={'/series/' + props.series} ><a>view series</a></Link>
+          {description}
         </div>
       </div>
     </div>
@@ -19,6 +40,7 @@ const Item = props => {
 }
 
 Item.propTypes = {
+  original: PropTypes.string,
   link: PropTypes.string,
   series: PropTypes.string,
   episode: PropTypes.number,
