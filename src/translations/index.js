@@ -1,7 +1,8 @@
 import en from './en'
 import es from './es'
+import ja from './ja'
 import ko from './ko'
 
 export default {
-  en, es, ko
+  en, es, ja, ko
 }
