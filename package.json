@@ -13,7 +13,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "form-data": "^3.0.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "path-to-regexp": "^6.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
