@@ -1,63 +1,23 @@
 {
-  "name": "ohys-fe",
-  "version": "1.0.0",
-  "description": "Powered by Ohys-Raws. Copyright 2020 Seia-Soto. All rights reserved.",
-  "author": "Seia-Soto",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Serift/ohys-fe.git"
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "test": "web-test-runner \"src/**/*.test.jsx\"",
+    "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "lint": "prettier --check \"src/**/*.{js,jsx}\""
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "form-data": "^3.0.0",
-    "node-fetch": "^2.6.1",
-    "path-to-regexp": "^6.1.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-app-polyfill": "^1.0.6",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.1",
-    "semantic-ui-css": "^2.4.1",
-    "util": "^0.12.2"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.9.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-config-standard-react": "^9.2.0",
-    "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-standard": "^4.0.1",
-    "prettier": "^1.19.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      ">0.2%",
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@snowpack/plugin-dotenv": "^2.0.5",
+    "@snowpack/plugin-react-refresh": "^2.3.9",
+    "@snowpack/web-test-runner-plugin": "^0.1.5",
+    "@testing-library/react": "^11.0.0",
+    "@web/test-runner": "^0.10.0",
+    "chai": "^4.2.0",
+    "prettier": "^2.0.5",
+    "snowpack": "^2.18.4"
   }
 }
