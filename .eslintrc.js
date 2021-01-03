@@ -4,10 +4,9 @@ module.exports = {
     es2021: true
   },
   extends: [
-    'plugin:react/recommended',
     'standard',
-    'stadard-jsx',
-    'stadard-react'
+    'standard-jsx',
+    'standard-react'
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -16,9 +15,6 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  plugins: [
-    'react'
-  ],
-  rules: {
-  }
+  plugins: [],
+  rules: {}
 }
