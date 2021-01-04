@@ -25,7 +25,12 @@ const Feeds = props => {
   const { page } = useParams()
 
   if (!page) return null
-  if (page < 1) return <Redirect to='/feeds/1' />
+
+  const isProperPageNumber =
+    (page >= 1) ||
+    (!isNaN(page))
+
+  if (!isProperPageNumber) return <Redirect to='/feeds/1' />
 
   const { data } = useSWR(
     api + '/api/v1/feed?' +
@@ -79,6 +84,11 @@ const Feeds = props => {
               posterImage={anime.posterImage}
               status={episode.resolution}
               title={`${(anime.translation.name || anime.name || episode.filename)} ${episodeNumber}`}
+              titleLink={
+                anime.id
+                  ? `/anime/${anime.id}`
+                  : 'https://eu.ohys.net/t/disk/' + episode.filename
+              }
               description={anime.translation.overview}
               maxDescriptionSize={125}
               maxImageHeight={125}

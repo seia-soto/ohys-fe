@@ -9,9 +9,7 @@ const NavItem = props => {
   return (
     <Text
       as='span'
-      style={{
-        paddingLeft: '20px'
-      }}
+      paddingLeft='20px'
     >
       <Link href={props.link}>
         {props.children}

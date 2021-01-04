@@ -8,6 +8,7 @@ import {
   Heading,
   Image,
   Text,
+  Link,
   useColorMode
 } from '@chakra-ui/react'
 
@@ -78,7 +79,9 @@ const ImageHeader = props => {
                 {props.status}
               </Text>
               <Heading size='lg'>
-                {props.title}
+                <Link href={props.titleLink}>
+                  {props.title}
+                </Link>
               </Heading>
               <Text>
                 {props.description.slice(0, props.maxDescriptionSize)}
@@ -101,6 +104,7 @@ ImageHeader.propTypes = {
   posterImage: PropTypes.string,
   status: PropTypes.string,
   title: PropTypes.string,
+  titleLink: PropTypes.string,
   description: PropTypes.string,
   maxDescriptionSize: PropTypes.number,
   maxImageHeight: PropTypes.number,
@@ -111,6 +115,7 @@ ImageHeader.defaultProps = {
   posterImage: '',
   status: '',
   title: '',
+  titleLink: '#',
   description: '',
   maxDescriptionSize: 300,
   maxImageHeight: 250,

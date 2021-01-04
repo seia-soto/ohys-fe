@@ -8,9 +8,7 @@ import {
 const Loading = props => {
   return (
     <Container
-      style={{
-        padding: '16px'
-      }}
+      padding='16px'
       centerContent
     >
       <Spinner />

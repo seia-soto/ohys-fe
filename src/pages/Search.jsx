@@ -1,23 +1,90 @@
 import * as React from 'react'
+import fetch from 'unfetch'
+import qs from 'qs'
 import {
+  Box,
+  Container,
   Input,
   InputGroup,
-  InputLeftElement
+  Heading
 } from '@chakra-ui/react'
 import {
-  SearchIcon
-} from '@chakra-ui/icons'
+  useParams
+} from 'react-router-dom'
+
+import ImageHeader from '../presets/ImageHeader'
+
+import api from '../api'
 
 const Search = props => {
+  const { useState, useEffect } = React
+  const { keyword: keywordFromURL } = useParams()
+
+  const [keyword, setKeyword] = useState(keywordFromURL || '')
+  const [data, setData] = useState()
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch(
+        api + '/api/v1/search?' +
+        qs.stringify({
+          language: 'ko',
+          keyword,
+          compact: 1
+        })
+      )
+      const json = await res.json()
+
+      setData(json)
+    }
+
+    getData()
+  }, [])
+
   return (
-    <InputGroup>
-      <InputLeftElement
-        pointerEvents='none'
-      >
-        <SearchIcon color='gray.300' />
-      </InputLeftElement>
-      <Input type='text' placeholder='Search' />
-    </InputGroup>
+    <Container
+      maxW='900px'
+      paddingTop='16px'
+    >
+      <Heading>
+        Search
+      </Heading>
+      <InputGroup paddingTop='16px'>
+        <Input
+          type='text'
+          placeholder='Put your keyword to search here'
+          value={keyword}
+          onChange={event => setKeyword(event.target.value)}
+          onKeyPress={event => {
+            if (event.key === 'Enter' && keyword.length) {
+              window.location.href = '/search/' + keyword
+            }
+          }}
+        />
+      </InputGroup>
+      {
+        data && (
+          <Box paddingTop='16px'>
+            {
+              data.map((anime, key) => {
+                return (
+                  <ImageHeader
+                    key={key}
+                    posterImage={anime.posterImage}
+                    title={(anime.translation.name || anime.name)}
+                    titleLink={`/anime/${anime.id}`}
+                    description={anime.translation.overview}
+                    maxDescriptionSize={125}
+                    maxImageHeight={125}
+                    padding='5px'
+                  />
+                )
+              })
+            }
+          </Box>
+        )
+      }
+    </Container>
   )
 }
 

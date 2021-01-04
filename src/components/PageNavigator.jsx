@@ -13,11 +13,7 @@ import {
 
 const PageNavigator = props => {
   return (
-    <Flex
-      style={{
-        padding: '14px'
-      }}
-    >
+    <Flex padding='14px'>
       <Spacer />
       <Stack direction='row' spacing={4}>
         {

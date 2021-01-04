@@ -117,14 +117,12 @@ const AiringSoon = props => {
         posterImage={next.data.posterImage}
         status='Airing Soon'
         title={`${next.time.format('HH:mm')} ${(next.data.translation.name || next.data.name)}`}
+        titleLink={`/anime/${next.data.id}`}
         description={next.data.translation.overview}
       />
       <Container
         maxW='900px'
-        style={{
-          paddingTop: '16px',
-          paddingBottom: '16px'
-        }}
+        paddingTop='16px'
       >
         <Heading>새롭게 시작하는 2021년 1분기</Heading>
         <Heading size='2xl'>애니메이션을 만나보세요!</Heading>

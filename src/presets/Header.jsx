@@ -11,7 +11,8 @@ import {
 } from '@chakra-ui/react'
 import {
   SunIcon,
-  MoonIcon
+  MoonIcon,
+  SearchIcon
 } from '@chakra-ui/icons'
 
 import NavItem from '../components/NavItem'
@@ -48,6 +49,15 @@ const Header = props => {
           </NavItem>
           <Spacer />
           <Box>
+            <IconButton
+              icon={<SearchIcon />}
+              aria-label='Search'
+              size='sm'
+              onClick={() => {
+                window.location.href = '/search'
+              }}
+              marginRight='4px'
+            />
             <IconButton
               icon={
                 colorMode === 'light'
