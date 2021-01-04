@@ -6,6 +6,10 @@ The frontend of Ohys-API.
 
 > ✨ Bootstrapped with Create Snowpack App (CSA).
 
+## Table of Contents
+
+- [Development](#development)
+
 ----
 
 # Development
