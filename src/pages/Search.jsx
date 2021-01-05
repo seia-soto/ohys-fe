@@ -1,6 +1,7 @@
 import * as React from 'react'
 import fetch from 'unfetch'
 import qs from 'qs'
+import { useSelector } from 'react-redux'
 import {
   Box,
   Container,
@@ -13,13 +14,15 @@ import {
 } from 'react-router-dom'
 
 import ImageHeader from '../presets/ImageHeader'
+import Loading from '../components/Loading'
 
 import api from '../api'
 
 const Search = props => {
   const { useState, useEffect } = React
-  const { keyword: keywordFromURL } = useParams()
 
+  const { language } = useSelector(state => state.settings)
+  const { keyword: keywordFromURL } = useParams()
   const [keyword, setKeyword] = useState(keywordFromURL || '')
   const [data, setData] = useState()
 
@@ -28,7 +31,7 @@ const Search = props => {
       const res = await fetch(
         api + '/api/v1/search?' +
         qs.stringify({
-          language: 'ko',
+          language,
           keyword,
           compact: 1
         })
@@ -62,6 +65,9 @@ const Search = props => {
           }}
         />
       </InputGroup>
+      {
+        !data && <Loading />
+      }
       {
         data && (
           <Box paddingTop='16px'>

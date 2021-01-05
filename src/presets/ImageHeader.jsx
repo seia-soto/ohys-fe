@@ -17,7 +17,7 @@ const ImageHeader = props => {
   const { colorMode } = useColorMode()
 
   const colorFilter = colorMode === 'light'
-    ? 'rgba(255,255,255,0.6)'
+    ? 'rgba(255,255,255,0.5)'
     : 'rgba(0,0,0,0.5)'
   const background = props.backdropImage
     ? `
@@ -34,7 +34,7 @@ const ImageHeader = props => {
       <Box
         style={
           props.backdropImage
-            ? { backdropFilter: 'blur(15px)' }
+            ? { backdropFilter: 'blur(12px)' }
             : {}
         }
       >
@@ -52,14 +52,18 @@ const ImageHeader = props => {
             }}
           >
             <Center flexShrink={0}>
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${props.posterImage}`}
-                crossOrigin='anonymous'
-                borderRadius='md'
-                width={{
-                  md: props.maxImageHeight
-                }}
-              />
+              {
+                props.posterImage && (
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${props.posterImage}`}
+                    crossOrigin='anonymous'
+                    borderRadius='md'
+                    width={{
+                      md: props.maxImageHeight
+                    }}
+                  />
+                )
+              }
             </Center>
             <Box
               mt={{
@@ -84,8 +88,14 @@ const ImageHeader = props => {
                 </Link>
               </Heading>
               <Text>
-                {props.description.slice(0, props.maxDescriptionSize)}
-                {props.description.length > props.maxDescriptionSize && '...'}
+                {
+                  props.maxDescriptionSize
+                    ? (
+                        props.description.slice(0, props.maxDescriptionSize) +
+                        `${props.description.length > props.maxDescriptionSize ? '...' : ''}`
+                      )
+                    : props.description
+                }
               </Text>
               <Box style={{ padding: '4px' }}>
                 {props.children}
@@ -117,7 +127,7 @@ ImageHeader.defaultProps = {
   title: '',
   titleLink: '#',
   description: '',
-  maxDescriptionSize: 300,
+  maxDescriptionSize: 250,
   maxImageHeight: 250,
   padding: '16px'
 }

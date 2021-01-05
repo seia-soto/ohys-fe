@@ -31,7 +31,7 @@ const AiringSoon = props => {
     for (let i = 1 /* skip first item from array */, l = data.length; i < l; i++) {
       const item = data[i]
 
-      if (current.diff(item.schedule.time) < current.diff(next.schedule.time)) {
+      if (current.diff(item.schedule.time) > current.diff(next.schedule.time)) {
         next = item
       }
     }

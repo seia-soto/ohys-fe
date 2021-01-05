@@ -3,6 +3,7 @@ import useSWR from 'swr'
 import qs from 'qs'
 import dayjs from 'dayjs'
 import quarterOfYear from 'dayjs/plugin/quarterOfYear'
+import { useSelector } from 'react-redux'
 import {
   Box,
   Container,
@@ -31,14 +32,18 @@ const Schedules = props => {
   dayjs.extend(quarterOfYear)
 
   const current = dayjs()
+  const year = current.year()
+  const quarter = current.quarter()
+  const day = current.day()
 
   // NOTE: hooks;
+  const { language } = useSelector(state => state.settings)
   const { data } = useSWR(
     api + '/api/v1/schedules?' +
     qs.stringify({
-      year: current.year(),
-      quarter: current.quarter(),
-      language: 'ko'
+      year,
+      quarter,
+      language
     })
   )
   const [schedules, setSchedule] = React.useState()
@@ -69,13 +74,49 @@ const Schedules = props => {
         paddingTop='16px'
       >
         {
-          current.quarter() === 1 && (
+          quarter === 1 && (
             <>
               <Heading>
-                Uprising first quarter
+                Upcoming first quarter
               </Heading>
               <Text>
-                Meet uprising new animes in {current.year()}
+                Meet upcoming new animes in {year}@{quarter}
+              </Text>
+            </>
+          )
+        }
+        {
+          quarter === 2 && (
+            <>
+              <Heading>
+                Continue with second quarter
+              </Heading>
+              <Text>
+                Meet new animes waiting for you in {year}@{quarter}
+              </Text>
+            </>
+          )
+        }
+        {
+          quarter === 3 && (
+            <>
+              <Heading>
+                This is not actual third place
+              </Heading>
+              <Text>
+                Meet uplifting new animes just like first ones in {year}@{quarter}
+              </Text>
+            </>
+          )
+        }
+        {
+          quarter === 4 && (
+            <>
+              <Heading>
+                Ending with you even in last quarter
+              </Heading>
+              <Text>
+                Meet new animes and stay the end of the year with them in {year}@{quarter}
               </Text>
             </>
           )
@@ -93,7 +134,7 @@ const Schedules = props => {
             <Box
               paddingTop='16px'
             >
-              <Tabs variant='soft-rounded'>
+              <Tabs variant='soft-rounded' defaultIndex={day}>
                 <TabList overflowX='auto'>
                   {
                     days.map((day, key) => {
@@ -109,7 +150,7 @@ const Schedules = props => {
                   {
                     days.map((day, idx) => {
                       return (
-                        <TabPanel key={`${day}`}>
+                        <TabPanel key={`${day}`} isLazy>
                           {
                             schedules
                               .filter(anime => {
@@ -119,12 +160,30 @@ const Schedules = props => {
 
                                 return rules
                               })
+                              .sort((prev, next) => {
+                                if (prev.schedule.hour < next.schedule.hour) {
+                                  return -1
+                                }
+                                if (prev.schedule.hour > next.schedule.hour) {
+                                  return 1
+                                }
+
+                                // NOTE: get mintues;
+                                if (prev.schedule.minute < next.schedule.minute) {
+                                  return -1
+                                }
+                                if (prev.schedule.minute > next.schedule.minute) {
+                                  return 1
+                                }
+
+                                return 0
+                              })
                               .map((anime, key) => {
                                 return (
                                   <ImageHeader
                                     key={`${day}.${idx}`}
                                     posterImage={anime.posterImage}
-                                    title={(anime.translation.name || anime.name)}
+                                    title={`${anime.schedule.time.format('HH:mm')} ${(anime.translation.name || anime.name)}`}
                                     titleLink={`/anime/${anime.id}`}
                                     description={anime.translation.overview}
                                     maxDescriptionSize={125}

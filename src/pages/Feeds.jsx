@@ -1,6 +1,7 @@
 import * as React from 'react'
 import useSWR from 'swr'
 import qs from 'qs'
+import { useSelector } from 'react-redux'
 import {
   Box,
   Badge,
@@ -32,10 +33,11 @@ const Feeds = props => {
 
   if (!isProperPageNumber) return <Redirect to='/feeds/1' />
 
+  const { language } = useSelector(state => state.settings)
   const { data } = useSWR(
     api + '/api/v1/feed?' +
     qs.stringify({
-      language: 'ko',
+      language,
       page: Number(page) - 1
     })
   )
@@ -62,7 +64,7 @@ const Feeds = props => {
         </Box>
         <Spacer />
         <PageNavigator
-          previousText='Previous'
+          previousText='Prev'
           nextText='Next'
           min={1}
           current={page}
@@ -75,7 +77,7 @@ const Feeds = props => {
         data.episodes.map((episode, key) => {
           const anime = data.animes[episode.animeId] || { translation: {} }
           const episodeNumber = episode.number === -1
-            ? ''
+            ? `${episode.resolution.split('x')[1]}P ALL`
             : ' - ' + episode.number
 
           return (
@@ -99,7 +101,7 @@ const Feeds = props => {
                   window.location.href = 'https://eu.ohys.net/t/disk/' + episode.filename
                 }}
               >
-                다운로드
+                Download
               </Button>
             </ImageHeader>
           )
@@ -112,7 +114,7 @@ const Feeds = props => {
       >
         <Spacer />
         <PageNavigator
-          previousText='Previous'
+          previousText='Prev'
           nextText='Next'
           min={1}
           current={page}
