@@ -16,6 +16,7 @@
     "prop-types": "^15.7.2",
     "qs": "^6.9.4",
     "react": "^17.0.0",
+    "react-app-polyfill": "^2.0.0",
     "react-dom": "^17.0.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
@@ -28,7 +29,9 @@
   "devDependencies": {
     "@snowpack/plugin-dotenv": "^2.0.5",
     "@snowpack/plugin-react-refresh": "^2.3.9",
+    "@snowpack/plugin-webpack": "^2.2.0",
     "babel-eslint": "^10.1.0",
+    "clean-webpack-plugin": "^3.0.0",
     "eslint": "^7.17.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-config-standard-jsx": "^10.0.0",
