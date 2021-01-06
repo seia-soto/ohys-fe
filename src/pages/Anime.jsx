@@ -50,7 +50,7 @@ const Anime = props => {
         title={(data.translation.name || data.name)}
         titleLink={`/anime/${data.id}`}
         description={data.translation.overview}
-        maxDescriptionSize={0}
+        maxDescriptionSize={450}
       >
         <List spacing={2}>
           <ListItem>

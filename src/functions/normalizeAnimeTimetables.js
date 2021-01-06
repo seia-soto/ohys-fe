@@ -4,6 +4,7 @@ import utc from 'dayjs/plugin/utc'
 export default data => {
   dayjs.extend(utc)
 
+  const currentDay = dayjs().day()
   const results = []
 
   for (let i = 0, l = data.length; i < l; i++) {
@@ -33,11 +34,14 @@ export default data => {
       day = 0
     }
 
-    const time = dayjs()
+    let time = dayjs()
       .day(day)
       .hour(hour)
       .minute(minute)
       .utcOffset(9, true)
+
+    // NOTE: set the start point to today;
+    if (day < currentDay) time = time.add(7, 'day')
 
     item.schedule = {
       day,

@@ -17,6 +17,7 @@ const AiringSoon = props => {
   dayjs.extend(quarterOfYear)
 
   const current = dayjs()
+  const day = current.day()
 
   const [next, setNext] = useState()
 
@@ -28,10 +29,15 @@ const AiringSoon = props => {
 
     let next = data[0]
 
-    for (let i = 1 /* skip first item from array */, l = data.length; i < l; i++) {
+    for (let i = 0 /* skip first item from array */, l = data.length; i < l; i++) {
       const item = data[i]
 
-      if (current.diff(item.schedule.time) > current.diff(next.schedule.time)) {
+      if (item.schedule.day !== day) continue
+
+      const isCloser =
+        (item.schedule.time.isAfter(current)) &&
+        (item.schedule.time.isBefore(next.schedule.time))
+      if (isCloser) {
         next = item
       }
     }

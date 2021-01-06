@@ -150,7 +150,7 @@ const Schedules = props => {
                   {
                     days.map((day, idx) => {
                       return (
-                        <TabPanel key={`${day}`} isLazy>
+                        <TabPanel key={day} isLazy>
                           {
                             schedules
                               .filter(anime => {
@@ -181,7 +181,7 @@ const Schedules = props => {
                               .map((anime, key) => {
                                 return (
                                   <ImageHeader
-                                    key={`${day}.${idx}`}
+                                    key={`${day}.${idx}.${anime.name}`}
                                     posterImage={anime.posterImage}
                                     title={`${anime.schedule.time.format('HH:mm')} ${(anime.translation.name || anime.name)}`}
                                     titleLink={`/anime/${anime.id}`}

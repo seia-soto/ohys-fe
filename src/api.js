@@ -1,1 +1,1 @@
-export default 'http://localhost:9012'
+export default 'https://api-v0.ohys.seia.io'
