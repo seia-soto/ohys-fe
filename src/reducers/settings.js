@@ -15,7 +15,7 @@ const reducer = (state = initialStates, action) => {
       if (fallback) payload.language = 'en'
 
       return {
-        language: payload.language || 'en'
+        language: (payload.language || 'en').toLowerCase()
       }
     }
     default:
