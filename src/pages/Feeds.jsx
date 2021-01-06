@@ -5,18 +5,21 @@ import { useSelector } from 'react-redux'
 import {
   Box,
   Badge,
-  Button,
+  Link,
   Container,
   Flex,
   Heading,
-  Spacer
+  Text,
+  Spacer,
+  UnorderedList,
+  List,
+  ListItem
 } from '@chakra-ui/react'
 import {
   Redirect,
   useParams
 } from 'react-router-dom'
 
-import ImageHeader from '../presets/ImageHeader'
 import Loading from '../components/Loading'
 import PageNavigator from '../components/PageNavigator'
 
@@ -73,40 +76,37 @@ const Feeds = props => {
           nextLink={`/feeds/${Number(page) + 1}`}
         />
       </Flex>
-      {
-        data.episodes.map((episode, key) => {
-          const anime = data.animes[episode.animeId] || { translation: {} }
-          const episodeNumber = episode.number === -1
-            ? `${episode.resolution.split('x')[1]}P ALL`
-            : ' - ' + episode.number
+      <List>
+        {
+          data.episodes.map((episode, key) => {
+            const anime = data.animes[episode.animeId] || { translation: {} }
+            const episodeNumber = episode.number === -1
+              ? `${episode.resolution.split('x')[1]}P ALL`
+              : ' - ' + episode.number
 
-          return (
-            <ImageHeader
-              key={key}
-              posterImage={anime.posterImage}
-              status={episode.resolution}
-              title={`${(anime.translation.name || anime.name || episode.filename)} ${episodeNumber}`}
-              titleLink={
-                anime.id
-                  ? `/anime/${anime.id}`
-                  : 'https://eu.ohys.net/t/disk/' + episode.filename
-              }
-              description={anime.translation.overview}
-              maxDescriptionSize={125}
-              maxImageHeight={125}
-              padding='5px'
-            >
-              <Button
-                onClick={() => {
-                  window.location.href = 'https://eu.ohys.net/t/disk/' + episode.filename
-                }}
+            return (
+              <ListItem
+                key={key}
+                padding='12px'
               >
-                Download
-              </Button>
-            </ImageHeader>
-          )
-        })
-      }
+                <Heading size='md'>
+                  <Link href={'https://eu.ohys.net/t/disk/' + episode.filename}>
+                    {anime.translation.name || anime.name || episode.filename} {episodeNumber}
+                  </Link>
+                </Heading>
+                <Text>
+                  {anime.name} {episodeNumber} ({episode.resolution})
+                </Text>
+                <UnorderedList>
+                  <ListItem>
+                    <Link href={'/anime/' + anime.id}>View series</Link>
+                  </ListItem>
+                </UnorderedList>
+              </ListItem>
+            )
+          })
+        }
+      </List>
       <Flex
         style={{
           padding: '14px'
