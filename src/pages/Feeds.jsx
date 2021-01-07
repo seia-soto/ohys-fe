@@ -5,16 +5,26 @@ import { useSelector } from 'react-redux'
 import {
   Box,
   Badge,
+  Button,
   Link,
   Container,
   Flex,
   Heading,
   Text,
   Spacer,
-  UnorderedList,
+  Stack,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
   List,
-  ListItem
+  ListItem,
+  useClipboard,
+  useToast
 } from '@chakra-ui/react'
+import {
+  ChevronDownIcon
+} from '@chakra-ui/icons'
 import {
   Redirect,
   useParams
@@ -44,6 +54,9 @@ const Feeds = props => {
       page: Number(page) - 1
     })
   )
+  const [clipboard, setClipboard] = React.useState('')
+  const { onCopy } = useClipboard(clipboard)
+  const toast = useToast()
 
   if (!data) return <Loading />
 
@@ -95,13 +108,50 @@ const Feeds = props => {
                   </Link>
                 </Heading>
                 <Text>
-                  {anime.name} {episodeNumber} ({episode.resolution})
+                  {anime.scheduleName || anime.name} {episodeNumber} ({episode.resolution})
                 </Text>
-                <UnorderedList>
-                  <ListItem>
-                    <Link href={'/anime/' + anime.id}>View series</Link>
-                  </ListItem>
-                </UnorderedList>
+                <Stack
+                  spacing={2}
+                  direction='row'
+                  paddingTop='8px'
+                >
+                  <Button
+                    size='sm'
+                    onClick={() => {
+                      window.location.href = '/anime/' + anime.id
+                    }}
+                  >
+                    View series
+                  </Button>
+                  <Menu>
+                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />} size='sm'>
+                      Actions
+                    </MenuButton>
+                    <MenuList>
+                      <MenuItem
+                        onClick={() => {
+                          setClipboard('https://eu.ohys.net/t/disk/' + episode.filename)
+                          onCopy()
+                          toast({
+                            title: 'Copied!',
+                            description: clipboard,
+                            status: 'success',
+                            isClosable: true
+                          })
+                        }}
+                      >
+                        Copy link to file
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          window.location.href = 'https://cryental.dev/services/anime/?search=' + anime.scheduleName
+                        }}
+                      >
+                        View on mirror (Cryental)
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
+                </Stack>
               </ListItem>
             )
           })

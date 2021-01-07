@@ -3,6 +3,7 @@ import useSWR from 'swr'
 import qs from 'qs'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import fetch from 'unfetch'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {
@@ -32,8 +33,17 @@ const Anime = props => {
       language
     })
   )
+  const [mirrorData, setMirrorData] = React.useState()
 
   dayjs.extend(relativeTime)
+
+  React.useEffect(() => {
+    if (!data) return
+
+    fetch('https://api.cryental.dev/anime?q=' + data.scheduleName)
+      .then(res => res.json())
+      .then(json => setMirrorData(json))
+  }, [data])
 
   if (!data) return <Loading />
 
@@ -94,7 +104,27 @@ const Anime = props => {
                 <ListItem key={key}>
                   <ListIcon as={DownloadIcon} />
                   <Link href={'https://eu.ohys.net/t/disk/' + episode.filename}>
-                    {data.name} {episodeNumber} ({episode.resolution}p)
+                    {data.scheduleName || data.name} {episodeNumber} ({episode.resolution}p)
+                  </Link>
+                </ListItem>
+              )
+            })
+          }
+        </List>
+        <Heading size='lg' paddingTop='16px'>
+          Mirror
+        </Heading>
+        <List spacing={2} paddingTop='8px'>
+          {
+            !mirrorData && <Loading />
+          }
+          {
+            mirrorData && mirrorData.map((file, key) => {
+              return (
+                <ListItem key={key}>
+                  <ListIcon as={DownloadIcon} />
+                  <Link href={'https://api.cryental.dev/anime/download?proper=magnet&id=' + file.id}>
+                    {file.torrentName}
                   </Link>
                 </ListItem>
               )
