@@ -96,15 +96,11 @@ const Anime = props => {
         <List spacing={2} paddingTop='8px'>
           {
             data.episodes.map((episode, key) => {
-              const episodeNumber = episode.number === -1
-                ? `${episode.resolution.split('x')[1]}P ALL`
-                : ' - ' + episode.number
-
               return (
                 <ListItem key={key}>
                   <ListIcon as={DownloadIcon} />
                   <Link href={'https://eu.ohys.net/t/disk/' + episode.filename}>
-                    {data.scheduleName || data.name} {episodeNumber} ({episode.resolution}p)
+                    {episode.filename}
                   </Link>
                 </ListItem>
               )
