@@ -183,6 +183,7 @@ const Schedules = props => {
                                   <ImageHeader
                                     key={`${day}.${idx}.${anime.name}`}
                                     posterImage={anime.posterImage}
+                                    status={anime.scheduleName}
                                     title={`${anime.schedule.time.format('HH:mm')} ${(anime.translation.name || anime.name)}`}
                                     titleLink={`/anime/${anime.id}`}
                                     description={anime.translation.overview}
