@@ -41,7 +41,7 @@ const Search = props => {
       setData(json)
     }
 
-    getData()
+    if (keyword) getData()
   }, [])
 
   return (
@@ -66,7 +66,7 @@ const Search = props => {
         />
       </InputGroup>
       {
-        !data && <Loading />
+        !data && keywordFromURL && <Loading />
       }
       {
         data && (
@@ -77,6 +77,7 @@ const Search = props => {
                   <ImageHeader
                     key={key}
                     posterImage={anime.posterImage}
+                    status={anime.scheduleName}
                     title={(anime.translation.name || anime.name)}
                     titleLink={`/anime/${anime.id}`}
                     description={anime.translation.overview}
