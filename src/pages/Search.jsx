@@ -4,16 +4,18 @@ import qs from 'qs'
 import { useSelector } from 'react-redux'
 import {
   Box,
+  Badge,
   Container,
   Input,
   InputGroup,
-  Heading
+  Link,
+  Heading,
+  Text
 } from '@chakra-ui/react'
 import {
   useParams
 } from 'react-router-dom'
 
-import ImageHeader from '../presets/ImageHeader'
 import Loading from '../components/Loading'
 
 import api from '../api'
@@ -70,21 +72,34 @@ const Search = props => {
       }
       {
         data && (
-          <Box paddingTop='16px'>
+          <Box>
             {
               data.map((anime, key) => {
+                if (!anime.episodes) return null
+
                 return (
-                  <ImageHeader
-                    key={key}
-                    posterImage={anime.posterImage}
-                    status={anime.scheduleName}
-                    title={(anime.translation.name || anime.name)}
-                    titleLink={`/anime/${anime.id}`}
-                    description={anime.translation.overview}
-                    maxDescriptionSize={125}
-                    maxImageHeight={125}
-                    padding='5px'
-                  />
+                  <Box key={key} paddingTop='22px'>
+                    <Text
+                      fontWeight='bold'
+                      textTransform='uppercase'
+                      fontSize='sm'
+                      letterSpacing='wide'
+                    >
+                      {anime.scheduleName}
+                    </Text>
+                    <Heading size='md'>
+                      <Link href={`/anime/${anime.id}`}>
+                        {(anime.translation.name || anime.name) + ' '}
+                        <Badge>{anime.episodes} Episodes</Badge>
+                      </Link>
+                    </Heading>
+                    <Text>
+                      {
+                        anime.translation.overview.slice(0, 125) +
+                        `${anime.translation.overview.length > 125 ? '...' : ''}`
+                      }
+                    </Text>
+                  </Box>
                 )
               })
             }
