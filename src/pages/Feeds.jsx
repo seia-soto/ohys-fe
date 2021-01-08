@@ -126,7 +126,7 @@ const Feeds = props => {
                     >
                       Series
                     </Button>
-                    <Menu placement='bottom'>
+                    <Menu placement='bottom-end'>
                       <MenuButton as={IconButton} icon={<ChevronDownIcon />} size='sm' />
                       <MenuList>
                         <MenuItem
