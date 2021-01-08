@@ -9,12 +9,15 @@ import {
 import {
   LinkIcon
 } from '@chakra-ui/icons'
+import {
+  Link as RouterLink
+} from 'react-router-dom'
 
 const BoxItems = props => {
   return (
     <Box padding='16px' shadow='md' borderWidth='1px'>
       <Heading fontSize='md'>
-        <Link href={props.link}>
+        <Link as={RouterLink} to={props.link}>
           {props.title}
           {props.link && <LinkIcon />}
         </Link>
