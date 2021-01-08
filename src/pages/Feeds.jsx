@@ -8,6 +8,7 @@ import {
   Button,
   Link,
   Container,
+  Divider,
   Flex,
   Heading,
   Text,
@@ -18,10 +19,12 @@ import {
   MenuList,
   MenuItem,
   List,
-  ListItem
+  ListItem,
+  IconButton
 } from '@chakra-ui/react'
 import {
-  ChevronDownIcon
+  ChevronDownIcon,
+  ExternalLinkIcon
 } from '@chakra-ui/icons'
 import {
   Link as RouterLink,
@@ -88,51 +91,62 @@ const Feeds = props => {
               : ' - ' + episode.number
 
             return (
-              <ListItem
-                key={key}
-                paddingTop='14px'
-              >
-                <Heading size='sm'>
-                  <Link href={'https://eu.ohys.net/t/disk/' + episode.filename} color='blue.500'>
-                    {anime.translation.name || anime.name || episode.filename} {episodeNumber}
-                  </Link>
-                </Heading>
-                <Text>
-                  {anime.scheduleName || anime.name} {episodeNumber} ({episode.resolution})
-                </Text>
-                <Stack
-                  spacing={2}
-                  direction='row'
-                  paddingTop='2.5px'
+              <Box key={key}>
+                <ListItem
+                  display={{
+                    md: 'flex'
+                  }}
+                  paddingTop='8px'
                 >
-                  <Button
-                    as={RouterLink}
-                    size='sm'
-                    to={'/anime/' + anime.id}
+                  <Box display='inline-block'>
+                    <Heading size='sm'>
+                      <Link href={'https://eu.ohys.net/t/disk/' + episode.filename} color='blue.500'>
+                        {anime.translation.name || anime.name || episode.filename} {episodeNumber}
+                      </Link>
+                    </Heading>
+                    <Text>
+                      {anime.scheduleName || anime.name} {episodeNumber} ({episode.resolution})
+                    </Text>
+                  </Box>
+                  <Spacer
+                    display={['none', 'block']}
+                  />
+                  <Stack
+                    as={Flex}
+                    flexShrink={0}
+                    spacing={2}
+                    direction='row'
+                    paddingTop='4px'
                   >
-                    View series
-                  </Button>
-                  <Menu>
-                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />} size='sm'>
-                      Actions
-                    </MenuButton>
-                    <MenuList>
-                      <MenuItem
-                        as={Link}
-                        href={'https://nyaa.si/?u=ohys&q=' + anime.scheduleName}
-                      >
-                        View on Nyaa.si
-                      </MenuItem>
-                      <MenuItem
-                        as={Link}
-                        href={'https://cryental.dev/services/anime/?search=' + anime.scheduleName}
-                      >
-                        View on mirror (Cryental)
-                      </MenuItem>
-                    </MenuList>
-                  </Menu>
-                </Stack>
-              </ListItem>
+                    <Button
+                      as={RouterLink}
+                      size='sm'
+                      to={'/anime/' + anime.id}
+                      leftIcon={<ExternalLinkIcon />}
+                    >
+                      Series
+                    </Button>
+                    <Menu placement='bottom'>
+                      <MenuButton as={IconButton} icon={<ChevronDownIcon />} size='sm' />
+                      <MenuList>
+                        <MenuItem
+                          as={Link}
+                          href={'https://nyaa.si/?u=ohys&q=' + anime.scheduleName}
+                        >
+                          View on Nyaa.si
+                        </MenuItem>
+                        <MenuItem
+                          as={Link}
+                          href={'https://cryental.dev/services/anime/?search=' + anime.scheduleName}
+                        >
+                          View on mirror (Cryental)
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                  </Stack>
+                </ListItem>
+                <Divider marginTop='8px' />
+              </Box>
             )
           })
         }

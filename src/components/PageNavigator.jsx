@@ -2,8 +2,6 @@ import * as React from 'react'
 import * as PropTypes from 'prop-types'
 import {
   Button,
-  Flex,
-  Spacer,
   ButtonGroup
 } from '@chakra-ui/react'
 import {
@@ -16,35 +14,32 @@ import {
 
 const PageNavigator = props => {
   return (
-    <Flex padding='14px'>
-      <Spacer />
-      <ButtonGroup direction='row' spacing={2} size='sm'>
-        {
-          props.min < props.current && (
-            <Button
-              as={RouterLink}
-              leftIcon={<ArrowBackIcon />}
-              variant='outline'
-              to={props.previousLink}
-            >
-              {props.previousText}
-            </Button>
-          )
-        }
-        {
-          props.end && (
-            <Button
-              as={RouterLink}
-              rightIcon={<ArrowForwardIcon />}
-              variant='solid'
-              to={props.nextLink}
-            >
-              {props.nextText}
-            </Button>
-          )
-        }
-      </ButtonGroup>
-    </Flex>
+    <ButtonGroup direction='row' spacing={2} size='sm'>
+      {
+        props.min < props.current && (
+          <Button
+            as={RouterLink}
+            leftIcon={<ArrowBackIcon />}
+            variant='outline'
+            to={props.previousLink}
+          >
+            {props.previousText}
+          </Button>
+        )
+      }
+      {
+        props.end && (
+          <Button
+            as={RouterLink}
+            rightIcon={<ArrowForwardIcon />}
+            variant='solid'
+            to={props.nextLink}
+          >
+            {props.nextText}
+          </Button>
+        )
+      }
+    </ButtonGroup>
   )
 }
 
