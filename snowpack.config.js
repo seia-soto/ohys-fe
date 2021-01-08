@@ -12,6 +12,11 @@ module.exports = {
     [
       '@snowpack/plugin-webpack',
       {
+        target: [
+          'web',
+          'es5'
+        ],
+        sourceMap: false,
         extendConfig: config => {
           config.plugins.push(new CleanWebpackPlugin({
             dry: false,
