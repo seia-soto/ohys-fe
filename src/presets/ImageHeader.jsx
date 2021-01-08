@@ -11,6 +11,9 @@ import {
   Link,
   useColorMode
 } from '@chakra-ui/react'
+import {
+  Link as RouterLink
+} from 'react-router-dom'
 
 const ImageHeader = props => {
   // NOTE: hooks;
@@ -46,7 +49,6 @@ const ImageHeader = props => {
           }}
         >
           <Box
-            p={4}
             display={{
               md: 'flex'
             }}
@@ -82,8 +84,8 @@ const ImageHeader = props => {
               >
                 {props.status}
               </Text>
-              <Heading size='lg'>
-                <Link href={props.titleLink}>
+              <Heading size='md'>
+                <Link as={RouterLink} to={props.titleLink}>
                   {props.title}
                 </Link>
               </Heading>

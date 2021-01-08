@@ -14,6 +14,9 @@ import {
   MoonIcon,
   SearchIcon
 } from '@chakra-ui/icons'
+import {
+  Link as RouterLink
+} from 'react-router-dom'
 
 import NavItem from '../components/NavItem'
 
@@ -28,7 +31,7 @@ const Header = props => {
           ? 'white'
           : 'gray.900'
       }
-      padding='12px'
+      padding='8px'
       shadow='sm'
     >
       <Container maxW='900px'>
@@ -37,7 +40,7 @@ const Header = props => {
             as='span'
             size='md'
           >
-            <Link href='/'>
+            <Link as={RouterLink} to='/'>
               Ohys
             </Link>
           </Heading>
@@ -50,12 +53,11 @@ const Header = props => {
           <Spacer />
           <Box>
             <IconButton
+              as={RouterLink}
               icon={<SearchIcon />}
               aria-label='Search'
               size='sm'
-              onClick={() => {
-                window.location.href = '/search'
-              }}
+              to='/search'
               marginRight='4px'
             />
             <IconButton

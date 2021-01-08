@@ -13,6 +13,7 @@ import {
   Text
 } from '@chakra-ui/react'
 import {
+  Link as RouterLink,
   useParams
 } from 'react-router-dom'
 
@@ -51,7 +52,7 @@ const Search = props => {
       maxW='900px'
       paddingTop='16px'
     >
-      <Heading>
+      <Heading size='md'>
         Search
       </Heading>
       <InputGroup paddingTop='16px'>
@@ -88,7 +89,7 @@ const Search = props => {
                       {anime.scheduleName}
                     </Text>
                     <Heading size='md'>
-                      <Link href={`/anime/${anime.id}`}>
+                      <Link as={RouterLink} to={`/anime/${anime.id}`} color='blue.500'>
                         {(anime.translation.name || anime.name) + ' '}
                         <Badge>{anime.episodes} Episodes</Badge>
                       </Link>

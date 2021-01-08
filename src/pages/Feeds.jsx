@@ -18,14 +18,13 @@ import {
   MenuList,
   MenuItem,
   List,
-  ListItem,
-  useClipboard,
-  useToast
+  ListItem
 } from '@chakra-ui/react'
 import {
   ChevronDownIcon
 } from '@chakra-ui/icons'
 import {
+  Link as RouterLink,
   Redirect,
   useParams
 } from 'react-router-dom'
@@ -54,26 +53,17 @@ const Feeds = props => {
       page: Number(page) - 1
     })
   )
-  const [clipboard, setClipboard] = React.useState('')
-  const { onCopy } = useClipboard(clipboard)
-  const toast = useToast()
 
   if (!data) return <Loading />
 
   return (
     <Container
       maxW='900px'
-      style={{
-        paddingTop: '16px'
-      }}
+      paddingTop='14px'
     >
-      <Flex
-        style={{
-          padding: '14px'
-        }}
-      >
+      <Flex paddingTop='14px'>
         <Box>
-          <Heading>
+          <Heading size='md'>
             Feeds: {page}
           </Heading>
           <Badge>Live</Badge>
@@ -100,10 +90,10 @@ const Feeds = props => {
             return (
               <ListItem
                 key={key}
-                padding='12px'
+                paddingTop='14px'
               >
-                <Heading size='md'>
-                  <Link href={'https://eu.ohys.net/t/disk/' + episode.filename}>
+                <Heading size='sm'>
+                  <Link href={'https://eu.ohys.net/t/disk/' + episode.filename} color='blue.500'>
                     {anime.translation.name || anime.name || episode.filename} {episodeNumber}
                   </Link>
                 </Heading>
@@ -113,13 +103,12 @@ const Feeds = props => {
                 <Stack
                   spacing={2}
                   direction='row'
-                  paddingTop='8px'
+                  paddingTop='2.5px'
                 >
                   <Button
+                    as={RouterLink}
                     size='sm'
-                    onClick={() => {
-                      window.location.href = '/anime/' + anime.id
-                    }}
+                    to={'/anime/' + anime.id}
                   >
                     View series
                   </Button>
@@ -129,23 +118,14 @@ const Feeds = props => {
                     </MenuButton>
                     <MenuList>
                       <MenuItem
-                        onClick={() => {
-                          setClipboard('https://eu.ohys.net/t/disk/' + episode.filename)
-                          onCopy()
-                          toast({
-                            title: 'Copied!',
-                            description: clipboard,
-                            status: 'success',
-                            isClosable: true
-                          })
-                        }}
+                        as={Link}
+                        href={'https://nyaa.si/?u=ohys&q=' + anime.scheduleName}
                       >
-                        Copy link to file
+                        View on Nyaa.si
                       </MenuItem>
                       <MenuItem
-                        onClick={() => {
-                          window.location.href = 'https://cryental.dev/services/anime/?search=' + anime.scheduleName
-                        }}
+                        as={Link}
+                        href={'https://cryental.dev/services/anime/?search=' + anime.scheduleName}
                       >
                         View on mirror (Cryental)
                       </MenuItem>

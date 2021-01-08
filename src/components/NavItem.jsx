@@ -4,6 +4,9 @@ import {
   Text,
   Link
 } from '@chakra-ui/react'
+import {
+  Link as RouterLink
+} from 'react-router-dom'
 
 const NavItem = props => {
   return (
@@ -11,7 +14,7 @@ const NavItem = props => {
       as='span'
       paddingLeft='20px'
     >
-      <Link href={props.link}>
+      <Link as={RouterLink} to={props.link}>
         {props.children}
       </Link>
     </Text>

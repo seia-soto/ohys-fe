@@ -90,7 +90,7 @@ const Anime = props => {
         </List>
       </ImageHeader>
       <Container maxW='900px'>
-        <Heading size='lg' paddingTop='16px'>
+        <Heading size='md' paddingTop='16px'>
           Episodes
         </Heading>
         <List spacing={2} paddingTop='8px'>
@@ -107,7 +107,7 @@ const Anime = props => {
             })
           }
         </List>
-        <Heading size='lg' paddingTop='16px'>
+        <Heading size='md' paddingTop='16px'>
           Mirror
         </Heading>
         <List spacing={2} paddingTop='8px'>

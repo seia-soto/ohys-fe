@@ -76,7 +76,7 @@ const Schedules = props => {
         {
           quarter === 1 && (
             <>
-              <Heading>
+              <Heading size='md'>
                 Upcoming first quarter
               </Heading>
               <Text>
@@ -88,7 +88,7 @@ const Schedules = props => {
         {
           quarter === 2 && (
             <>
-              <Heading>
+              <Heading size='md'>
                 Continue with second quarter
               </Heading>
               <Text>
@@ -100,7 +100,7 @@ const Schedules = props => {
         {
           quarter === 3 && (
             <>
-              <Heading>
+              <Heading size='md'>
                 This is not actual third place
               </Heading>
               <Text>
@@ -112,7 +112,7 @@ const Schedules = props => {
         {
           quarter === 4 && (
             <>
-              <Heading>
+              <Heading size='md'>
                 Ending with you even in last quarter
               </Heading>
               <Text>
@@ -131,10 +131,8 @@ const Schedules = props => {
       >
         {
           data && (
-            <Box
-              paddingTop='16px'
-            >
-              <Tabs variant='soft-rounded' defaultIndex={day}>
+            <Box paddingTop='16px'>
+              <Tabs variant='soft-rounded' defaultIndex={day} size='sm'>
                 <TabList overflowX='auto'>
                   {
                     days.map((day, key) => {

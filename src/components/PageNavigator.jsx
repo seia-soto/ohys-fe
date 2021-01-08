@@ -4,26 +4,28 @@ import {
   Button,
   Flex,
   Spacer,
-  Stack
+  ButtonGroup
 } from '@chakra-ui/react'
 import {
   ArrowBackIcon,
   ArrowForwardIcon
 } from '@chakra-ui/icons'
+import {
+  Link as RouterLink
+} from 'react-router-dom'
 
 const PageNavigator = props => {
   return (
     <Flex padding='14px'>
       <Spacer />
-      <Stack direction='row' spacing={4}>
+      <ButtonGroup direction='row' spacing={2} size='sm'>
         {
           props.min < props.current && (
             <Button
+              as={RouterLink}
               leftIcon={<ArrowBackIcon />}
               variant='outline'
-              onClick={() => {
-                window.location.href = props.previousLink
-              }}
+              to={props.previousLink}
             >
               {props.previousText}
             </Button>
@@ -32,17 +34,16 @@ const PageNavigator = props => {
         {
           props.end && (
             <Button
+              as={RouterLink}
               rightIcon={<ArrowForwardIcon />}
               variant='solid'
-              onClick={() => {
-                window.location.href = props.nextLink
-              }}
+              to={props.nextLink}
             >
               {props.nextText}
             </Button>
           )
         }
-      </Stack>
+      </ButtonGroup>
     </Flex>
   )
 }

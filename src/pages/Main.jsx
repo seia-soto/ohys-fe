@@ -26,7 +26,7 @@ const Main = props => {
     <Container
       maxW='900px'
     >
-      <Heading size='lg' paddingTop='16px'>
+      <Heading size='md' paddingTop='16px'>
         Getting start
       </Heading>
       <Stack spacing={4} paddingTop='16px'>
@@ -46,12 +46,12 @@ const Main = props => {
           description='Search animes from database'
         />
       </Stack>
-      <Heading size='lg' paddingTop='32px'>
+      <Heading size='md' paddingTop='32px'>
         Settings
       </Heading>
       <Stack paddingTop='16px'>
         <Box>
-          <Heading size='md'>
+          <Heading size='sm'>
             Language (anime metadata)
           </Heading>
           <Text>
@@ -82,7 +82,7 @@ const Main = props => {
           </Box>
         </Box>
       </Stack>
-      <Heading size='lg' paddingTop='32px'>
+      <Heading size='md' paddingTop='32px'>
         GitHub
       </Heading>
       <Stack spacing={4} paddingTop='16px'>

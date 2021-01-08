@@ -13,7 +13,7 @@ import {
 const BoxItems = props => {
   return (
     <Box padding='16px' shadow='md' borderWidth='1px'>
-      <Heading fontSize='xl'>
+      <Heading fontSize='md'>
         <Link href={props.link}>
           {props.title}
           {props.link && <LinkIcon />}
